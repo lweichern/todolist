@@ -1,6 +1,7 @@
 import React from "react";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 
 export default function Todos(props) {
   console.log(typeof props.id);
@@ -9,7 +10,7 @@ export default function Todos(props) {
     background: !props.isComplete ? "rgb(233, 110, 110)" : "rgb(110, 233, 116)",
   };
   return (
-    <div
+    <motion.div
       className="todo-item"
       style={styles}
       onDoubleClick={() => props.handleToggle(props.id)}
@@ -18,6 +19,9 @@ export default function Todos(props) {
       id={props.id}
       onDragOver={(ev) => ev.preventDefault()}
       onDrop={props.handleDrop}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      layout
     >
       <h3 className="todo-task" id={props.id}>
         {props.task}
@@ -31,6 +35,6 @@ export default function Todos(props) {
         onClick={() => props.deleteTodo(props.id)}
         id={props.id}
       />
-    </div>
+    </motion.div>
   );
 }
